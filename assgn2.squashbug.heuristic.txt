@@ -1,0 +1,6 @@
+Heuristic:
+    Assumption: Guess PID given using terminal must be a child or grand child of trojan or trojan itself. (Easily identifiable after sorting htop result wrt %CPU used)
+    From 3 possible PIDs (Given PID, its parent, grand parent):
+        Eliminate processes which have different name than the given PID (As /proc/pid/status:Name will be same for processes spawned by same parent)
+    From remaining processes, the processes with status S (sleeping) will be the trojan
+    If none of them is sleeping then the trojan will be processes with maximum number of children (here count of children is calculated recursively)
